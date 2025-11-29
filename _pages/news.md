@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: page
 permalink: /news/
 title: News
 nav: true
@@ -8,7 +8,6 @@ pagination:
   enabled: true
   tag: images
   per_page: 2
-
 ---
 
 <div class="post">
