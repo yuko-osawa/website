@@ -140,7 +140,7 @@ newsletter:
 # -----------------------------------------------------------------------------
 
 collections:
-  news:
+  events:
     defaults:
       layout: post
     output: true

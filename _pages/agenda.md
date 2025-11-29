@@ -6,4 +6,4 @@ nav: true
 nav_order: 3
 ---
 
-{% include news.liquid %}
+{% include events.liquid %}
