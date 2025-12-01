@@ -15,8 +15,7 @@ layout: default
   </header>
 
   <article>
-
- <!-- News -->
+    <!-- News -->
     {% if page.announcements and page.announcements.enabled %}
       <h2>
         <a href="{{ '/agenda/' | relative_url }}" style="color: inherit">Agenda</a>
@@ -34,8 +33,6 @@ layout: default
 
     <div class="clearfix">{{ content }}</div>
 
-   
-
     <!-- Social -->
     {% if page.social %}
       <div class="social">
@@ -44,6 +41,5 @@ layout: default
         <div class="contact-note">{{ site.contact_note }}</div>
       </div>
     {% endif %}
-
   </article>
 </div>

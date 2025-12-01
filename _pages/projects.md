@@ -8,6 +8,6 @@ pagination:
   enabled: true
   collection: projects
   per_page: 6
-  sort_field: 'importance'
+  sort_field: "importance"
   sort_reverse: false
 ---

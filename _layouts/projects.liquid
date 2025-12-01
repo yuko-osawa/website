@@ -1,14 +1,12 @@
 ---
 layout: default
 ---
-
 {% if page.horizontal %}
-
   <div class="container">
     <div class="row row-cols-1 row-cols-md-2">
-    {% for project in paginator.posts %}
-      {% include projects_horizontal.liquid %}
-    {% endfor %}
+      {% for project in paginator.posts %}
+        {% include projects_horizontal.liquid %}
+      {% endfor %}
     </div>
   </div>
 {% else %}
@@ -20,5 +18,5 @@ layout: default
 {% endif %}
 
 {% if page.pagination.enabled %}
-{% include pagination.liquid %}
+  {% include pagination.liquid %}
 {% endif %}

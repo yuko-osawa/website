@@ -1,22 +1,21 @@
 ---
 layout: default
 ---
-
 {% capture events_years %}{% for item in site.events %}{{ item.date | date: "%Y" }}|{% endfor %}{% endcapture %}
-{% assign years = events_years | split: "|" | uniq | sort | reverse %}
+{% assign years = events_years | split: '|' | uniq | sort | reverse %}
 
-  <div class="tag-category-list">
-    <ul class="p-0 m-0">
-      {% for year in years %}
-        <li>
-          <i class="fa-solid fa-hashtag fa-sm"></i> <a href="{{ year | prepend: '/events/' | relative_url }}">{{ year }}</a>
-        </li>
-        {% unless forloop.last %}
-          <p>&bull;</p>
-        {% endunless %}
-      {% endfor %}
-    </ul>
-  </div>
+<div class="tag-category-list">
+  <ul class="p-0 m-0">
+    {% for year in years %}
+      <li>
+        <i class="fa-solid fa-hashtag fa-sm"></i> <a href="{{ year | prepend: '/events/' | relative_url }}">{{ year }}</a>
+      </li>
+      {% unless forloop.last %}
+        <p>&bull;</p>
+      {% endunless %}
+    {% endfor %}
+  </ul>
+</div>
 
 <div class="post">
   <header class="post-header">
@@ -33,7 +32,9 @@ layout: default
           <tr>
             <th scope="row">{{ document.date | date: '%b %d, %Y' }}</th>
             <td>
-              {% if document.redirect == blank %}
+              {% if document.inline %}
+                {{ document.content | remove: '<p>' | remove: '</p>' | emojify }}
+              {% elsif document.redirect == blank %}
                 <a class="post-link" href="{{ document.url | relative_url }}">{{ document.title }}</a>
               {% elsif document.redirect contains '://' %}
                 <a class="post-link" href="{{ document.redirect }}" target="_blank">{{ document.title }}</a>

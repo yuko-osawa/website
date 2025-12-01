@@ -2,7 +2,7 @@
 layout: home
 title: Home
 permalink: /
-subtitle: 
+subtitle:
 
 announcements:
   enabled: true # includes a list of news items

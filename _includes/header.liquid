@@ -62,15 +62,14 @@
             {% if p.nav and p.autogen == null %}
               {% assign parent_link = p.permalink | remove: 'index.html' %}
               <li class="nav-item {% if page.url contains parent_link %}active{% endif %}">
-                 {%- if p.permalink contains '://' -%}
+                {%- if p.permalink contains '://' -%}
                   {%- assign url = p.permalink -%}
                 {%- elsif p.permalink contains '/blog/' -%}
                   {%- assign url = '/blog/' -%}
                 {%- elsif p.permalink contains '/events/' -%}
-                  {% assign past_site_events = site.events | where_exp: "item",
-"item.date < site.time" %}
+                  {% assign past_site_events = site.events | where_exp: 'item', 'item.date < site.time' %}
                   {% capture events_years %}{% for item in past_site_events %}{{ item.date | date: "%Y" }}|{% endfor %}{% endcapture %}
-                  {%- assign year = events_years | split: "|" | uniq | sort | reverse | first -%}
+                  {%- assign year = events_years | split: '|' | uniq | sort | reverse | first -%}
                   {%- assign url = year | prepend: '/events/' | relative_url -%}
                 {%- else -%}
                   {%- assign url = p.url -%}
