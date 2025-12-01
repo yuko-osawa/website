@@ -485,6 +485,36 @@ ul.task-list input[type="checkbox"] {
   }
 }
 
+// Header
+.croccanteLogo,
+.croccanteTitleText {
+  display: inline-block;
+}
+.site-branding {
+  float: left;
+  display: inline-flex;
+}
+.croccanteLogo,
+.croccanteTitleText {
+  display: inline-block;
+}
+.site-branding img {
+  display: block;
+  width: auto;
+  max-height: 55px;
+}
+.site-title,
+.site-description {
+  margin: 0;
+}
+.site-title {
+  font-size: 26px;
+  line-height: 1;
+}
+.site-description {
+  font-size: 12px;
+}
+
 // Footer
 footer.fixed-bottom {
   background-color: var(--global-footer-bg-color);

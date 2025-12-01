@@ -2,23 +2,27 @@
   <!-- Nav Bar -->
   <nav id="navbar" class="navbar navbar-light navbar-expand-sm {% if site.navbar_fixed %}fixed-top{% else %}sticky-top{% endif %}" role="navigation">
     <div class="container">
-      <a class="navbar-brand title font-weight-lighter" href="{{ site.baseurl }}/">
-        {% if site.title == 'blank' %}
-          {% if site.first_name %}
-            <span class="font-weight-bold">
-              {{- site.first_name -}}
-            </span>
-          {% endif %}
-          {% if site.middle_name %}
-            {{- site.middle_name -}}
-          {% endif %}
-          {% if site.last_name %}
-            {{- site.last_name -}}
-          {% endif %}
-        {% else %}
-          {{- site.title -}}
-        {% endif %}
-      </a>
+      <div class="site-branding">
+        <div class="croccanteLogo" itemscope="" itemtype="http://schema.org/Organization">
+          <a href="{{ site.baseurl }}/" class="custom-logo-link" rel="home" aria-current="page"
+            ><img
+              width="46"
+              height="46"
+              data-src="https://yuko-osawa.com/wp-content/uploads/2020/04/site_logo.png"
+              class="custom-logo ls-is-cached lazyloaded"
+              alt="Yuko Osawa"
+              decoding="async"
+              src="https://yuko-osawa.com/wp-content/uploads/2020/04/site_logo.png"
+              style="--smush-placeholder-width: 46px; --smush-placeholder-aspect-ratio: 46/46;"
+          ></a>
+        </div>
+        <div class="croccanteTitleText">
+          <h1 class="site-title">
+            <a href="{{ site.baseurl }}/" rel="home">{{- site.title -}}</a>
+          </h1>
+          <p class="site-description">{{- site.subtitle -}}</p>
+        </div>
+      </div>
       <!-- Navbar Toggle -->
       <button
         class="navbar-toggler collapsed ml-auto"
