@@ -490,6 +490,10 @@ footer.fixed-bottom {
   background-color: var(--global-footer-bg-color);
   font-size: 0.75rem;
 
+  .contact-icons {
+    font-size: 1.5rem;
+  }
+
   .container {
     color: var(--global-footer-text-color);
     padding-top: 9px;
