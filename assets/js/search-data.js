@@ -3,32 +3,18 @@ const ninja = document.querySelector('ninja-keys');
 
 // add the home and posts menu items
 ninja.data = [{
-    id: "nav-accueil",
-    title: "Accueil",
+    id: "nav-home",
+    title: "Home",
     section: "Navigation",
     handler: () => {
       window.location.href = "/";
     },
-  },{id: "nav-news",
-          title: "News",
-          description: "",
-          section: "Navigation",
-          handler: () => {
-            window.location.href = "/news/index.html";
-          },
-        },{id: "nav-biographie",
-          title: "Biographie",
-          description: "FIXME - Descriptoin",
-          section: "Navigation",
-          handler: () => {
-            window.location.href = "/biographie/";
-          },
-        },{id: "nav-agenda",
+  },{id: "nav-agenda",
           title: "Agenda",
           description: "",
           section: "Navigation",
           handler: () => {
-            window.location.href = "/agenda/";
+            window.location.href = "/events/";
           },
         },{id: "nav-projets",
           title: "Projets",
@@ -51,18 +37,14 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/contact/";
           },
-        },{id: "post-a-post-with-plotly-js",
-        
-          title: "a post with plotly.js",
-        
-        description: "this is what included plotly.js code could look like",
-        section: "Posts",
-        handler: () => {
-          
-            window.location.href = "/blog/2025/plotly/";
-          
-        },
-      },{id: "post-a-post-with-image-galleries",
+        },{id: "nav-blog",
+          title: "Blog",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/blog/";
+          },
+        },{id: "post-a-post-with-image-galleries",
         
           title: "a post with image galleries",
         
@@ -304,17 +286,6 @@ ninja.data = [{
             window.location.href = "/blog/2021/diagrams/";
           
         },
-      },{id: "post-a-distill-style-blog-post",
-        
-          title: "a distill-style blog post",
-        
-        description: "an example of a distill-style blog post and main elements",
-        section: "Posts",
-        handler: () => {
-          
-            window.location.href = "/blog/2021/distill/";
-          
-        },
       },{id: "post-a-post-with-twitter",
         
           title: "a post with twitter",
@@ -324,17 +295,6 @@ ninja.data = [{
         handler: () => {
           
             window.location.href = "/blog/2020/twitter/";
-          
-        },
-      },{id: "post-a-post-with-disqus-comments",
-        
-          title: "a post with disqus comments",
-        
-        description: "an example of a blog post with disqus comments",
-        section: "Posts",
-        handler: () => {
-          
-            window.location.href = "/blog/2015/disqus-comments/";
           
         },
       },{id: "post-a-post-with-math",
@@ -381,27 +341,29 @@ ninja.data = [{
             window.location.href = "/blog/2015/formatting-and-links/";
           
         },
-      },{id: "events-a-simple-inline-announcement",
-          title: 'A simple inline announcement.',
+      },{id: "events-a-simple-inline-announcement-with-markdown-emoji-sparkles-smile",
+          title: 'A simple inline announcement with Markdown emoji! :sparkles: :smile:',
+          description: "",
+          section: "Events",},{id: "events-a-simple-inline-announcement-with-markdown-emoji-sparkles-smile",
+          title: 'A simple inline announcement with Markdown emoji! :sparkles: :smile:',
+          description: "",
+          section: "Events",},{id: "events-a-simple-inline-announcement-with-markdown-emoji-sparkles-smile",
+          title: 'A simple inline announcement with Markdown emoji! :sparkles: :smile:',
+          description: "",
+          section: "Events",},{id: "events-a-simple-inline-announcement-with-markdown-emoji-sparkles-smile",
+          title: 'A simple inline announcement with Markdown emoji! :sparkles: :smile:',
           description: "",
           section: "Events",},{id: "events-a-long-announcement-with-details",
           title: 'A long announcement with details',
           description: "",
           section: "Events",handler: () => {
-              window.location.href = "/events/announcement_2/";
-            },},{id: "events-a-simple-inline-announcement-with-markdown-emoji-sparkles-smile",
-          title: 'A simple inline announcement with Markdown emoji! :sparkles: :smile:',
+              window.location.href = "/event/2026/announcement_1/";
+            },},{id: "events-a-long-announcement-with-details",
+          title: 'A long announcement with details',
           description: "",
-          section: "Events",},{id: "events-a-simple-inline-announcement-with-markdown-emoji-sparkles-smile",
-          title: 'A simple inline announcement with Markdown emoji! :sparkles: :smile:',
-          description: "",
-          section: "Events",},{id: "events-a-simple-inline-announcement-with-markdown-emoji-sparkles-smile",
-          title: 'A simple inline announcement with Markdown emoji! :sparkles: :smile:',
-          description: "",
-          section: "Events",},{id: "events-a-simple-inline-announcement-with-markdown-emoji-sparkles-smile",
-          title: 'A simple inline announcement with Markdown emoji! :sparkles: :smile:',
-          description: "",
-          section: "Events",},{id: "projects-project-1",
+          section: "Events",handler: () => {
+              window.location.href = "/event/2027/announcement_2/";
+            },},{id: "projects-project-1",
           title: 'project 1',
           description: "with background image",
           section: "Projects",handler: () => {
@@ -446,6 +408,16 @@ ninja.data = [{
           description: "another project with an image 🎉",
           section: "Projects",handler: () => {
               window.location.href = "/projects/9_project/";
+            },},{id: "static-biography",
+          title: 'Biography',
+          description: "",
+          section: "Static",handler: () => {
+              window.location.href = "/static/biography/";
+            },},{id: "static-gallery",
+          title: 'Gallery',
+          description: "",
+          section: "Static",handler: () => {
+              window.location.href = "/static/gallery/";
             },},{
         id: 'social-cv',
         title: 'CV',
@@ -488,30 +460,4 @@ ninja.data = [{
         handler: () => {
           window.open("https://www.alberteinstein.com/", "_blank");
         },
-      },{
-      id: 'light-theme',
-      title: 'Change theme to light',
-      description: 'Change the theme of the site to Light',
-      section: 'Theme',
-      handler: () => {
-        setThemeSetting("light");
-      },
-    },
-    {
-      id: 'dark-theme',
-      title: 'Change theme to dark',
-      description: 'Change the theme of the site to Dark',
-      section: 'Theme',
-      handler: () => {
-        setThemeSetting("dark");
-      },
-    },
-    {
-      id: 'system-theme',
-      title: 'Use system default theme',
-      description: 'Change the theme of the site to System Default',
-      section: 'Theme',
-      handler: () => {
-        setThemeSetting("system");
-      },
-    },];
+      },];
