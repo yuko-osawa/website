@@ -1,9 +1,7 @@
 ---
 layout: page
 title: Agenda
-permalink: /agenda/
+permalink: /events/
 nav: true
-nav_order: 3
+nav_order: 2
 ---
-
-{% include events.liquid %}

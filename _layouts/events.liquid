@@ -1,0 +1,49 @@
+---
+layout: default
+---
+
+{% capture events_years %}{% for item in site.events %}{{ item.date | date: "%Y" }}|{% endfor %}{% endcapture %}
+{% assign years = events_years | split: "|" | uniq | sort | reverse %}
+
+  <div class="tag-category-list">
+    <ul class="p-0 m-0">
+      {% for year in years %}
+        <li>
+          <i class="fa-solid fa-hashtag fa-sm"></i> <a href="{{ year | prepend: '/events/' | relative_url }}">{{ year }}</a>
+        </li>
+        {% unless forloop.last %}
+          <p>&bull;</p>
+        {% endunless %}
+      {% endfor %}
+    </ul>
+  </div>
+
+<div class="post">
+  <header class="post-header">
+    {% if page.type == 'year' %}
+      <h1 class="post-title"><i class="fa-solid fa-calendar fa-sm"></i> {{ page.date | date: '%Y' }}</h1>
+      <p class="post-description">an archive of {{ page.collection_name }} from this year</p>
+    {% endif %}
+  </header>
+
+  <article class="archive">
+    <div class="table-responsive">
+      <table class="table table-sm table-borderless">
+        {% for document in page.documents %}
+          <tr>
+            <th scope="row">{{ document.date | date: '%b %d, %Y' }}</th>
+            <td>
+              {% if document.redirect == blank %}
+                <a class="post-link" href="{{ document.url | relative_url }}">{{ document.title }}</a>
+              {% elsif document.redirect contains '://' %}
+                <a class="post-link" href="{{ document.redirect }}" target="_blank">{{ document.title }}</a>
+              {% else %}
+                <a class="post-link" href="{{ document.redirect | relative_url }}">{{ document.title }}</a>
+              {% endif %}
+            </td>
+          </tr>
+        {% endfor %}
+      </table>
+    </div>
+  </article>
+</div>

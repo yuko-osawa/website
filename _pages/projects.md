@@ -1,13 +1,13 @@
 ---
-layout: projet
+layout: projects
 permalink: /projects/
 title: Projets
 nav: true
-nav_order: 4
+nav_order: 3
 pagination:
   enabled: true
   collection: projects
-  per_page: 3 
+  per_page: 6
   sort_field: 'importance'
   sort_reverse: false
 ---

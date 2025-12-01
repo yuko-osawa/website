@@ -4,7 +4,7 @@ permalink: /galerie/
 title: Galerie
 description: FIXME - Description
 nav: true
-nav_order: 5
+nav_order: 4
 images:
   photoswipe: true
 ---
