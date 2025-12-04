@@ -66,10 +66,7 @@
                 {%- elsif p.permalink contains '/blog/' -%}
                   {%- assign url = '/blog/' -%}
                 {%- elsif p.permalink contains '/events/' -%}
-                  {% assign past_site_events = site.events | where_exp: 'item', 'item.date < site.time' %}
-                  {% capture events_years %}{% for item in past_site_events %}{{ item.date | date: "%Y" }}|{% endfor %}{% endcapture %}
-                  {%- assign year = events_years | split: '|' | uniq | sort | reverse | first -%}
-                  {%- assign url = year | prepend: '/events/' | relative_url -%}
+                  {% include events_url.liquid %}
                 {%- else -%}
                   {%- assign url = p.url -%}
                 {%- endif %}
