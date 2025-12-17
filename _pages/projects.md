@@ -2,6 +2,7 @@
 layout: projects
 permalink: /projects/
 title: Projets
+description: FIXME - Projects - Description
 nav: true
 nav_order: 3
 pagination:

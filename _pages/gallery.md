@@ -2,7 +2,7 @@
 layout: page
 permalink: /galerie/
 title: Galerie
-description: FIXME - Description
+description: FIXME - Galerie - Description
 nav: true
 nav_order: 4
 images:

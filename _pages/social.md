@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Social
-static_content: social
+description: FIXME - Social - Description
 output: false
 socials:
   facebook_id: yuko.osawa.79

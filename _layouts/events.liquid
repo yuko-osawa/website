@@ -4,6 +4,17 @@ layout: default
 {% capture events_years %}{% for item in site.events %}{{ item.date | date: "%Y" }}|{% endfor %}{% endcapture %}
 {% assign years = events_years | split: '|' | uniq | sort | reverse %}
 
+{% assign agenda_page = site.pages | where: 'permalink', '/events/' | first %}
+<div class="post">
+  <header class="post-header">
+    <h1 class="post-title">{{ agenda_page.title }}</h1>
+    <p class="post-description">{{ agenda_page.description }}</p>
+  </header>
+
+  <article>
+    {{ agenda_page.content }}
+  </article>
+</div>
 <div class="tag-category-list">
   <ul class="p-0 m-0">
     {% for year in years %}
@@ -21,7 +32,6 @@ layout: default
   <header class="post-header">
     {% if page.type == 'year' %}
       <h1 class="post-title"><i class="fa-solid fa-calendar fa-sm"></i> {{ page.date | date: '%Y' }}</h1>
-      <p class="post-description">an archive of {{ page.collection_name }} from this year</p>
     {% endif %}
   </header>
 
