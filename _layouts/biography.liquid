@@ -1,0 +1,17 @@
+---
+layout: none
+---
+{% capture artist_name %}{{ page.firstname }} {{ page.lastname }} {% endcapture %}
+<article>
+  <h1>
+    {{ artist_name }}
+  </h1>
+
+  <div class="profile float-left">
+    {% assign profile_image_path = page.picture | prepend: 'assets/img/biographies/' %}
+    {% assign profile_image_class = 'img-fluid z-depth-1 rounded' %}
+    {% capture sizes %}(min-width: {{ site.max_width }}) {{ site.max_width | minus: 30 | times: 0.3}}px, (min-width: 576px) 30vw, 95vw"{% endcapture %}
+    {% include figure.liquid loading="eager" path=profile_image_path class=profile_image_class sizes=sizes alt=artist_name cache_bust=true %}
+  </div>
+  {{ content }}
+</article>

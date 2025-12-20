@@ -14,4 +14,7 @@ layout: default
 
     <div class="clearfix">{{ content }}</div>
   </article>
+
+  {% assign biography = site.biographies | where: 'slug', page.biography | first %}
+  {{ biography.output }}
 </div>

@@ -147,6 +147,16 @@ newsletter:
 
 collections_dir: content
 collections:
+  biographies:
+    output: true
+    defaults:
+      layout: none
+
+  pieces:
+    output: true
+    defaults:
+      layout: none
+
   events:
     output: true
     permalink: /event/:year/:title/
