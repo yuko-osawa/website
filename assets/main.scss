@@ -1,0 +1,384 @@
+---
+---
+
+@import "{{ site.theme }}";
+
+/* ─── Google Fonts ─────────────────────────────────────────── */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Noto+Sans:wght@400;700&display=swap");
+
+/* ─── Design tokens ────────────────────────────────────────── */
+:root {
+  --navy:    #0b1742;
+  --bg:      #f4f4f4;
+  --white:   #ffffff;
+  --accent:  #0b1742;
+  --border:  #c9c9c9;
+  --font-body: "Noto Sans", sans-serif;
+  --font-heading: "Inter", "Noto Sans", sans-serif;
+}
+
+/* ─── Base ─────────────────────────────────────────────────── */
+body {
+  font-family: var(--font-body);
+  font-size: 12px;
+  line-height: 2;
+  color: var(--navy);
+  background-color: var(--bg);
+}
+
+/* ─── Header / Nav ─────────────────────────────────────────── */
+.site-header {
+  background-color: var(--white);
+  border-top: none;
+  border-bottom: 1px solid var(--border);
+  padding: 0 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+
+  .wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+}
+
+.site-title-block {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  line-height: 1.2;
+}
+
+.site-title {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--navy) !important;
+  letter-spacing: 0;
+  text-decoration: none;
+
+  &:visited { color: var(--navy); }
+}
+
+.site-logo {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.site-subtitle {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  color: var(--navy);
+  opacity: 0.55;
+  margin: 0;
+  letter-spacing: 0.05em;
+  padding-left: calc(36px + 0.6rem);
+}
+
+.site-nav {
+  .trigger {
+    display: flex !important;
+    align-items: center;
+    flex-wrap: nowrap;
+  }
+
+  .page-link {
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--navy);
+    letter-spacing: normal;
+    text-transform: none;
+    margin-left: 1.5rem;
+    text-decoration: none;
+
+    &:hover { opacity: 0.6; }
+  }
+
+  /* Language switcher */
+  .lang-switcher {
+    margin-left: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    a, strong {
+      display: inline-flex;
+      align-items: center;
+      text-decoration: none;
+      font-size: 20px;
+    }
+    a { opacity: 0.45; &:hover { opacity: 1; } }
+    strong { opacity: 1; }
+  }
+}
+
+/* ─── Main content wrapper ─────────────────────────────────── */
+.page-content {
+  background-color: var(--bg);
+}
+
+.wrapper {
+  max-width: 1200px;
+}
+
+/* ─── Page / section typography ────────────────────────────── */
+h1 {
+  font-family: var(--font-heading);
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--navy);
+  letter-spacing: normal;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+
+h2 {
+  font-family: var(--font-heading);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--navy);
+  letter-spacing: normal;
+  margin-bottom: 0.5rem;
+}
+
+h3 {
+  font-family: var(--font-heading);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--navy);
+  letter-spacing: normal;
+}
+
+/* ─── Section label (rotated side labels like the original) ── */
+.section-label {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  transform: rotate(180deg);
+  font-family: var(--font-heading);
+  font-size: clamp(3rem, 8vw, 5rem);
+  font-weight: 400;
+  letter-spacing: -0.06em;
+  color: var(--navy);
+  opacity: 0.08;
+  position: absolute;
+  right: -1.5rem;
+  top: 50%;
+  transform: rotate(180deg) translateY(50%);
+  pointer-events: none;
+  user-select: none;
+  line-height: 1;
+}
+
+/* ─── Section wrapper ──────────────────────────────────────── */
+.site-section {
+  position: relative;
+  padding: 4rem 0;
+  overflow: hidden;
+
+  &:nth-child(even) {
+    background-color: var(--white);
+  }
+}
+
+.section-header {
+  margin-bottom: 2.5rem;
+
+  h2 {
+    font-family: var(--font-heading);
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--navy);
+    margin: 0 0 0.25rem;
+  }
+
+  .section-subtitle {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--navy);
+    opacity: 0.5;
+    margin: 0;
+  }
+}
+
+/* ─── Agenda / Event cards ─────────────────────────────────── */
+.event {
+  display: grid !important;
+  grid-template-columns: 160px 1fr !important;
+  gap: 0 2rem !important;
+  background: transparent !important;
+  border: none !important;
+  border-bottom: 1px solid var(--border) !important;
+  border-radius: 0 !important;
+  padding: 0.65rem 0 !important;
+  margin-bottom: 0 !important;
+
+  .event-meta {
+    font-size: 12px;
+    color: var(--navy);
+    line-height: 1.6;
+    padding-top: 0.15rem;
+
+    strong { font-weight: 700; }
+  }
+
+  .event-body {
+    h3 {
+      font-size: 14px;
+      font-weight: 700;
+      margin: 0 0 0.25rem;
+    }
+
+    p {
+      font-size: 12px;
+      color: var(--navy);
+      opacity: 0.7;
+      margin: 0;
+    }
+
+    a {
+      color: var(--navy);
+      font-size: 12px;
+      font-weight: 700;
+      text-decoration: none;
+      border-bottom: 1px solid var(--navy);
+      padding-bottom: 1px;
+      display: inline-block;
+      margin-top: 0.25rem;
+
+      &:hover { opacity: 0.6; }
+    }
+  }
+}
+
+.upcoming-agenda {
+  h2 { margin-bottom: 1.5rem; }
+}
+
+/* ─── Home biography ───────────────────────────────────────── */
+.home-biography {
+  margin-top: 3rem;
+  font-size: 12px;
+  line-height: 2;
+  color: var(--navy);
+
+  h2 { margin-bottom: 1.5rem; }
+
+  &__body {
+    display: flex;
+    gap: 3rem;
+    align-items: flex-start;
+  }
+
+  &__text {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__img {
+    width: 280px;
+    flex-shrink: 0;
+    object-fit: cover;
+  }
+}
+
+/* ─── Agenda tabs ──────────────────────────────────────────── */
+.tab-input { display: none; }
+
+.agenda-tabs {
+  .tab-labels {
+    display: flex;
+    gap: 0;
+    border-bottom: 2px solid var(--border);
+    margin-bottom: 2rem;
+  }
+
+  .tab-label {
+    font-family: var(--font-heading);
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--navy);
+    opacity: 0.4;
+    padding: 0.5rem 1.25rem;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+    transition: opacity 0.15s;
+
+    &:hover { opacity: 0.7; }
+  }
+
+  .tab-panel { display: none; }
+}
+
+@each $year in 2020, 2021, 2022, 2023, 2024, 2025, 2026, 2027, 2028, 2029 {
+  #tab-#{$year}:checked ~ .tab-labels .tab-label[for="tab-#{$year}"] {
+    opacity: 1;
+    border-bottom-color: var(--navy);
+  }
+  #tab-#{$year}:checked ~ .tab-panel[data-tab="tab-#{$year}"] {
+    display: block;
+  }
+}
+
+/* ─── Agenda section labels (Upcoming / Past) ──────────────── */
+.agenda-section-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--navy);
+  opacity: 0.4;
+  margin: 1.5rem 0 0.5rem;
+
+  &:first-child { margin-top: 0; }
+
+  &--past { margin-top: 2rem; }
+}
+
+.event--past {
+  opacity: 0.55;
+}
+
+/* ─── Footer ───────────────────────────────────────────────── */
+.site-footer {
+  background-color: var(--navy);
+  color: rgba(255,255,255,0.6);
+  padding: 1.25rem 0;
+  border-top: none;
+
+  .footer-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .footer-copy {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.5);
+  }
+
+  .footer-social {
+    display: flex;
+    gap: 1rem;
+
+    a {
+      color: rgba(255,255,255,0.5);
+      font-size: 1.1rem;
+      text-decoration: none;
+      transition: color 0.2s;
+
+      &:hover { color: var(--white); }
+    }
+  }
+}

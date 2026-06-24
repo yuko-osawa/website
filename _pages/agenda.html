@@ -1,0 +1,95 @@
+---
+layout: default
+title: Agenda
+permalink: /agenda/
+---
+
+{% assign t = site.data.meta[site.active_lang] %}
+{% assign events = site.data.agenda[site.active_lang] %}
+{% assign today = 'now' | date: "%Y-%m-%d" %}
+
+{% comment %} Collect unique years, sorted newest first {% endcomment %}
+{% assign all_years = "" | split: "" %}
+{% for event in events %}
+  {% assign y = event.date | slice: 0, 4 %}
+  {% unless all_years contains y %}
+    {% assign all_years = all_years | push: y %}
+  {% endunless %}
+{% endfor %}
+{% assign all_years = all_years | sort | reverse %}
+
+<div class="agenda-tabs">
+  {% comment %} Tab inputs (radio buttons for CSS-only tabs) {% endcomment %}
+  {% for year in all_years %}
+    {% assign tab_id = "tab-" | append: year %}
+    {% if forloop.first %}
+      <input type="radio" name="agenda-tab" id="{{ tab_id }}" class="tab-input" checked>
+    {% else %}
+      <input type="radio" name="agenda-tab" id="{{ tab_id }}" class="tab-input">
+    {% endif %}
+  {% endfor %}
+
+  {% comment %} Tab labels {% endcomment %}
+  <div class="tab-labels">
+    {% for year in all_years %}
+      {% assign tab_id = "tab-" | append: year %}
+      <label for="{{ tab_id }}" class="tab-label">{{ year }}</label>
+    {% endfor %}
+  </div>
+
+  {% comment %} Tab panels {% endcomment %}
+  {% for year in all_years %}
+    {% assign tab_id = "tab-" | append: year %}
+    <div class="tab-panel" data-tab="{{ tab_id }}">
+
+      {% comment %} Split events for this year into upcoming and past {% endcomment %}
+      {% assign year_events = events | where_exp: "e", "e.date contains year" %}
+
+      {% assign has_upcoming = false %}
+      {% assign has_past = false %}
+      {% for event in year_events %}
+        {% if event.date >= today %}{% assign has_upcoming = true %}{% endif %}
+        {% if event.date < today %}{% assign has_past = true %}{% endif %}
+      {% endfor %}
+
+      {% comment %} Upcoming events (ascending) {% endcomment %}
+      {% assign upcoming_events = year_events | where_exp: "e", "e.date >= today" %}
+      {% if upcoming_events.size > 0 %}
+        <h3 class="agenda-section-label">{{ t.agenda_upcoming }}</h3>
+        {% for event in upcoming_events %}
+          <div class="event">
+            <p class="event-meta">
+              {{ event.date }}{% if event.time != "" %} · {{ event.time }}{% endif %}
+              {% if event.location != "" %}<br>{{ event.location }}{% endif %}
+            </p>
+            <div class="event-body">
+              <h3>{{ event.title }}</h3>
+              {% if event.description != "" %}<p>{{ event.description }}</p>{% endif %}
+              {% if event.link != "" %}<a href="{{ event.link }}">{{ t.agenda_more_info }} &rarr;</a>{% endif %}
+            </div>
+          </div>
+        {% endfor %}
+      {% endif %}
+
+      {% comment %} Past events (descending — reverse the array) {% endcomment %}
+      {% assign past_events = year_events | where_exp: "e", "e.date < today" | reverse %}
+      {% if past_events.size > 0 %}
+        <h3 class="agenda-section-label agenda-section-label--past">{{ t.agenda_past }}</h3>
+        {% for event in past_events %}
+          <div class="event event--past">
+            <p class="event-meta">
+              {{ event.date }}{% if event.time != "" %} · {{ event.time }}{% endif %}
+              {% if event.location != "" %}<br>{{ event.location }}{% endif %}
+            </p>
+            <div class="event-body">
+              <h3>{{ event.title }}</h3>
+              {% if event.description != "" %}<p>{{ event.description }}</p>{% endif %}
+              {% if event.link != "" %}<a href="{{ event.link }}">{{ t.agenda_more_info }} &rarr;</a>{% endif %}
+            </div>
+          </div>
+        {% endfor %}
+      {% endif %}
+
+    </div>
+  {% endfor %}
+</div>

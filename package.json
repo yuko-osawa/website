@@ -1,6 +1,13 @@
 {
-  "devDependencies": {
-    "@shopify/prettier-plugin-liquid": "1.4.0",
-    "prettier": "^3.1.1"
+  "name": "workshop-site-scripts",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "download": "SHEETS_CONFIG=sheets.yml node .github/scripts/download-csvs.js",
+    "convert": "node .github/scripts/csv-to-yaml.js",
+    "sheets": "npm run download && npm run convert"
+  },
+  "dependencies": {
+    "js-yaml": "^4.1.0"
   }
 }

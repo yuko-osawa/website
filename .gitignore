@@ -1,14 +1,30 @@
-_site
-.bundle
-.sass-cache
-.jekyll-cache
+# Secrets
+.env
+
+# Jekyll build output
+_site/
+.jekyll-cache/
 .jekyll-metadata
-.DS_store
-.ruby-version
-.tweet-cache
-Gemfile.lock
-assets/libs/
+
+# Generated data files (rebuilt from Google Sheets)
+.csv-cache/
+_data/*.yml
+
+# Ruby
+.bundle/
+vendor/
+
+# Node
 node_modules/
-vendor
-.idea
-.venv
+
+# macOS
+.DS_Store
+*.swp
+*.swo
+
+# Claude Code local settings (machine-specific permissions)
+.claude/
+CLAUDE.md
+
+# Playwright MCP session artifacts
+.playwright-mcp/

@@ -1,0 +1,54 @@
+---
+layout: default
+title: Accueil
+permalink: /
+---
+
+{% assign t = site.data.meta[site.active_lang] %}
+{% assign data = site.data.home %}
+
+{% if data %}
+  <h1>{{ data[0].content }}</h1>
+{% endif %}
+
+{% assign events = site.data.agenda[site.active_lang] %}
+{% assign today = 'now' | date: "%Y-%m-%d" %}
+
+<section class="upcoming-agenda">
+  <h2>{{ t.upcoming_agenda }}</h2>
+  {% assign upcoming_count = 0 %}
+  {% if events %}
+    {% for event in events %}
+      {% if event.date >= today and upcoming_count < 3 %}
+        {% assign upcoming_count = upcoming_count | plus: 1 %}
+        <div class="event">
+          <p class="event-meta">
+            {{ event.date }}{% if event.time != "" %} · {{ event.time }}{% endif %}
+            {% if event.location != "" %}<br>{{ event.location }}{% endif %}
+          </p>
+          <div class="event-body">
+            <h3>{{ event.title }}</h3>
+            {% if event.description != "" %}<p>{{ event.description }}</p>{% endif %}
+            {% if event.link != "" %}<a href="{{ event.link }}">{{ t.agenda_more_info }} &rarr;</a>{% endif %}
+          </div>
+        </div>
+      {% endif %}
+    {% endfor %}
+    {% if upcoming_count == 0 %}
+      <p>{{ t.no_upcoming_events }}</p>
+    {% endif %}
+  {% endif %}
+</section>
+
+{% if t.home_biography %}
+<section class="home-biography">
+  {% if t.home_biography_title %}<h2>{{ t.home_biography_title }}</h2>{% endif %}
+  <div class="home-biography__body">
+    <div class="home-biography__text">{{ t.home_biography | markdownify }}</div>
+    {% assign bio_img = site.data.meta.all.biography_img %}
+    {% if bio_img and bio_img != "" %}
+      <img src="{{ bio_img }}" alt="{{ t.home_biography_title }}" class="home-biography__img">
+    {% endif %}
+  </div>
+</section>
+{% endif %}
