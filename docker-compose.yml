@@ -1,21 +1,33 @@
-# this file uses prebuilt image in dockerhub
 services:
   jekyll:
-    image: amirpourmand/al-folio:v0.14.7
-    build: .
-    # uncomment these if you are having this issue with the build:
-    # /usr/local/bundle/gems/jekyll-4.3.4/lib/jekyll/site.rb:509:in `initialize': Permission denied @ rb_sysopen - /srv/jekyll/.jekyll-cache/.gitignore (Errno::EACCES)
-    # and fill the args values with the output of the commands on the right
-    # build:
-    #   args:
-    #     GROUPID: # id -g
-    #     GROUPNAME: # id -gn
-    #     USERID: # id -u
-    #     USERNAME: # echo $USER
+    build:
+      context: .
+      dockerfile: Dockerfile.jekyll
     ports:
-      - 8080:8080
-      - 35729:35729
+      - "4000:4000"
+      - "35729:35729"  # livereload
     volumes:
-      - .:/srv/jekyll
+      - .:/site
+      - bundle_cache:/usr/local/bundle
+    env_file:
+      - .env
     environment:
       - JEKYLL_ENV=development
+      - SHEETS_CONFIG=sheets.yml
+
+  # One-off service: download CSVs then convert to YAML
+  # Usage: docker compose run --rm sheets
+  sheets:
+    build:
+      context: .
+      dockerfile: Dockerfile.jekyll
+    volumes:
+      - .:/site
+    env_file:
+      - .env
+    environment:
+      - SHEETS_CONFIG=sheets.yml
+    command: sh -c "node .github/scripts/download-csvs.js && node .github/scripts/csv-to-yaml.js"
+
+volumes:
+  bundle_cache:

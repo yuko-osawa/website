@@ -1,0 +1,13 @@
+sheets:
+  - name: agenda
+    secret: SHEET_AGENDA_URL
+    sort_by: date
+
+  - name: projects 
+    secret: SHEET_PROJECTS_URL
+    sort_by: order
+
+  - name: meta
+    secret: SHEET_META_URL
+    group_by: [lang]
+    key_value: [label, content]

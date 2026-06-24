@@ -1,4 +1,0 @@
-{% assign past_site_events = site.events | where_exp: 'item', 'item.date < site.time' %}
-{% capture events_years %}{% for item in past_site_events %}{{ item.date | date: "%Y" }}|{% endfor %}{% endcapture %}
-{% assign year = events_years | split: '|' | uniq | sort | reverse | first %}
-{% assign url = year | prepend: '/events/' | relative_url %}
