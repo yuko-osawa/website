@@ -1,4 +1,0 @@
-User-agent: *
-Disallow:
-
-Sitemap: https://alpha.yuko-osawa.com/sitemap.xml
