@@ -37,7 +37,7 @@ jobs:
           SHEET_META_URL: ${{ secrets.SHEET_META_URL }}
 
       - name: Convert CSVs to YAML
-        run: node .github/scripts/csv-to-yaml.js
+        run: mkdir -p _data && node .github/scripts/csv-to-yaml.js
 
       - name: Build Jekyll site
         run: bundle exec jekyll build
