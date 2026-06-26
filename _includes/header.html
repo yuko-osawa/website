@@ -1,56 +1,104 @@
 <header class="site-header">
-  <div class="wrapper">
-    <div class="site-title-block">
-      <a class="site-title" href="{{ '/' | relative_url }}">
-        <img src="{{ '/assets/images/logo.png' | relative_url }}" alt="{{ site.title }}" class="site-logo" />
-        {{ site.title }}
-      </a>
-      <p class="site-subtitle">{{ site.description }}</p>
-    </div>
+  <div class="header-inner">
+    <a class="site-brand" href="{{ '/' | relative_url }}">
+      <img src="{{ '/assets/images/logo.png' | relative_url }}" alt="{{ site.title }} logo" class="brand-logo">
+      <span class="brand-name">{{ site.title }}</span>
+      <span class="brand-sub">Vocal Coach – Collaborative Pianist | Paris</span>
+    </a>
 
-    <nav class="site-nav">
-      <input type="checkbox" id="nav-trigger" class="nav-trigger" />
-      <label for="nav-trigger">
-        <span class="menu-icon">
-          <svg viewBox="0 0 18 15" width="18px" height="15px">
-            <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,15,0,13.516l0,0c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
-          </svg>
-        </span>
-      </label>
-
-      <div class="trigger">
+    <div class="header-right">
+      <nav class="site-nav" aria-label="Primary">
         {%- for path in site.header_pages -%}
           {%- assign my_page = site.pages | where: "path", path | first -%}
           {%- if my_page.title -%}
-            <a class="page-link" href="{{ my_page.url | relative_url }}">{{ my_page.title }}</a>
+            <a class="nav-link{% if page.url == my_page.url %} nav-link--active{% endif %}"
+               href="{{ my_page.url | relative_url }}"
+               {% if page.url == my_page.url %}aria-current="page"{% endif %}>
+              {{ my_page.title }}
+            </a>
           {%- endif -%}
         {%- endfor -%}
+      </nav>
 
-        {%- assign available_langs = "" | split: "" -%}
-        {%- for lang in site.languages -%}
-          {%- if site.data.meta[lang] -%}
-            {%- assign available_langs = available_langs | push: lang -%}
-          {%- endif -%}
-        {%- endfor -%}
-        {%- if available_langs.size > 1 -%}
-          <span class="lang-switcher">
-            {%- for lang in available_langs -%}
-              {% capture lang_href %}{% if lang != site.default_lang %}/{{ lang }}{% endif %}{{page.url}}{% endcapture %}
-              {%- if lang == "fr" -%}{%- assign lang_flag = "🇫🇷" -%}
-              {%- elsif lang == "en" -%}{%- assign lang_flag = "🇬🇧" -%}
-              {%- elsif lang == "ja" -%}{%- assign lang_flag = "🇯🇵" -%}
-              {%- else -%}{%- assign lang_flag = lang | upcase -%}
-              {%- endif -%}
-              {%- if lang == site.active_lang -%}
-                <strong>{{ lang_flag }}</strong>
-              {%- else -%}
-                <a {% static_href %}href="{{ lang_href }}"{% endstatic_href %}>{{ lang_flag }}</a>
-              {%- endif -%}
-              {%- unless forloop.last -%}&nbsp;{%- endunless -%}
-            {%- endfor -%}
-          </span>
-        {%- endif -%}
+      <div class="social-links">
+        <a href="https://www.facebook.com/yuko.osawa.79" target="_blank" rel="noopener" aria-label="Facebook" class="social-link">
+          <svg viewBox="0 0 24 24" fill="currentColor" class="social-icon" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073Z"/></svg>
+        </a>
+        <a href="https://twitter.com/OsawaYuko" target="_blank" rel="noopener" aria-label="X (Twitter)" class="social-link">
+          <svg viewBox="0 0 24 24" fill="currentColor" class="social-icon" aria-hidden="true"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg>
+        </a>
+        <a href="https://www.youtube.com/channel/UC4T3tM6YP1j1Yt-KI4fQruA" target="_blank" rel="noopener" aria-label="YouTube" class="social-link">
+          <svg viewBox="0 0 24 24" fill="currentColor" class="social-icon" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814ZM9.545 15.568V8.432L15.818 12l-6.273 3.568Z"/></svg>
+        </a>
       </div>
-    </nav>
+
+      {%- assign available_langs = "" | split: "" -%}
+      {%- for lang in site.languages -%}
+        {%- if site.data.meta[lang] -%}
+          {%- assign available_langs = available_langs | push: lang -%}
+        {%- endif -%}
+      {%- endfor -%}
+      {%- if available_langs.size > 1 -%}
+        <div class="lang-switcher">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="lang-icon" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          {%- for lang in available_langs -%}
+            {%- if lang == "fr" -%}{%- assign lang_label = "Français" -%}
+            {%- elsif lang == "en" -%}{%- assign lang_label = "English" -%}
+            {%- elsif lang == "ja" -%}{%- assign lang_label = "日本語" -%}
+            {%- else -%}{%- assign lang_label = lang | upcase -%}
+            {%- endif -%}
+            {%- if lang == site.active_lang -%}
+              <span class="lang-current">{{ lang_label }}</span>
+            {%- else -%}
+              {% capture lang_href %}{% if lang != site.default_lang %}/{{ lang }}{% endif %}{{ page.url }}{% endcapture %}
+              <a {% static_href %}href="{{ lang_href }}"{% endstatic_href %} class="lang-option">{{ lang_label }}</a>
+            {%- endif -%}
+            {%- unless forloop.last -%}<span class="lang-sep">·</span>{%- endunless -%}
+          {%- endfor -%}
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="lang-chevron" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+      {%- endif -%}
+
+      <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle menu" aria-expanded="false">
+        <svg class="menu-icon-open" viewBox="0 0 18 15" fill="currentColor"><path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,15,0,13.516l0,0c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,12.031,18,12.696,18,13.516L18,13.516z"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="mobile-nav" id="mobile-nav" hidden>
+    {%- for path in site.header_pages -%}
+      {%- assign my_page = site.pages | where: "path", path | first -%}
+      {%- if my_page.title -%}
+        <a class="mobile-nav-link{% if page.url == my_page.url %} mobile-nav-link--active{% endif %}"
+           href="{{ my_page.url | relative_url }}">
+          {{ my_page.title }}
+        </a>
+      {%- endif -%}
+    {%- endfor -%}
+    <div class="mobile-social">
+      <a href="https://www.facebook.com/yuko.osawa.79" target="_blank" rel="noopener" aria-label="Facebook" class="social-link">
+        <svg viewBox="0 0 24 24" fill="currentColor" class="social-icon" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073Z"/></svg>
+      </a>
+      <a href="https://twitter.com/OsawaYuko" target="_blank" rel="noopener" aria-label="X (Twitter)" class="social-link">
+        <svg viewBox="0 0 24 24" fill="currentColor" class="social-icon" aria-hidden="true"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg>
+      </a>
+      <a href="https://www.youtube.com/channel/UC4T3tM6YP1j1Yt-KI4fQruA" target="_blank" rel="noopener" aria-label="YouTube" class="social-link">
+        <svg viewBox="0 0 24 24" fill="currentColor" class="social-icon" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814ZM9.545 15.568V8.432L15.818 12l-6.273 3.568Z"/></svg>
+      </a>
+    </div>
   </div>
 </header>
+
+<script>
+  (function() {
+    var btn = document.getElementById('mobile-menu-btn');
+    var nav = document.getElementById('mobile-nav');
+    if (btn && nav) {
+      btn.addEventListener('click', function() {
+        var expanded = btn.getAttribute('aria-expanded') === 'true';
+        btn.setAttribute('aria-expanded', String(!expanded));
+        if (expanded) { nav.setAttribute('hidden', ''); } else { nav.removeAttribute('hidden'); }
+      });
+    }
+  })();
+</script>

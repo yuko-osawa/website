@@ -8,88 +8,130 @@ permalink: /agenda/
 {% assign events = site.data.agenda[site.active_lang] %}
 {% assign today = 'now' | date: "%Y-%m-%d" %}
 
-{% comment %} Collect unique years, sorted newest first {% endcomment %}
-{% assign all_years = "" | split: "" %}
-{% for event in events %}
-  {% assign y = event.date | slice: 0, 4 %}
-  {% unless all_years contains y %}
-    {% assign all_years = all_years | push: y %}
-  {% endunless %}
-{% endfor %}
-{% assign all_years = all_years | sort | reverse %}
+<section class="agenda-section">
+  <div class="content-wrapper">
+    <header class="page-header">
+      <span class="page-eyebrow">{{ t.agenda_upcoming | default: "Calendrier" }}</span>
+      <h1 class="page-title">Agenda</h1>
+      <p class="page-subtitle">Tout ce qui arrive — et un retour sur les rencontres passées.</p>
+    </header>
 
-<div class="agenda-tabs">
-  {% comment %} Tab inputs (radio buttons for CSS-only tabs) {% endcomment %}
-  {% for year in all_years %}
-    {% assign tab_id = "tab-" | append: year %}
-    {% if forloop.first %}
-      <input type="radio" name="agenda-tab" id="{{ tab_id }}" class="tab-input" checked>
-    {% else %}
-      <input type="radio" name="agenda-tab" id="{{ tab_id }}" class="tab-input">
-    {% endif %}
-  {% endfor %}
-
-  {% comment %} Tab labels {% endcomment %}
-  <div class="tab-labels">
-    {% for year in all_years %}
-      {% assign tab_id = "tab-" | append: year %}
-      <label for="{{ tab_id }}" class="tab-label">{{ year }}</label>
+    {% comment %} Upcoming events {% endcomment %}
+    {% assign upcoming_events = "" | split: "" %}
+    {% for event in events %}
+      {% if event.date >= today and event.title != "" %}
+        {% assign upcoming_events = upcoming_events | push: event %}
+      {% endif %}
     {% endfor %}
-  </div>
 
-  {% comment %} Tab panels {% endcomment %}
-  {% for year in all_years %}
-    {% assign tab_id = "tab-" | append: year %}
-    <div class="tab-panel" data-tab="{{ tab_id }}">
-
-      {% comment %} Split events for this year into upcoming and past {% endcomment %}
-      {% assign year_events = events | where_exp: "e", "e.date contains year" %}
-
-      {% assign has_upcoming = false %}
-      {% assign has_past = false %}
-      {% for event in year_events %}
-        {% if event.date >= today %}{% assign has_upcoming = true %}{% endif %}
-        {% if event.date < today %}{% assign has_past = true %}{% endif %}
-      {% endfor %}
-
-      {% comment %} Upcoming events (ascending) {% endcomment %}
-      {% assign upcoming_events = year_events | where_exp: "e", "e.date >= today" %}
-      {% if upcoming_events.size > 0 %}
-        <h3 class="agenda-section-label">{{ t.agenda_upcoming }}</h3>
+    {% if upcoming_events.size > 0 %}
+    <div class="events-group">
+      <h2 class="events-group-title">{{ t.agenda_upcoming | default: "À venir" }}</h2>
+      <ul class="events-grid events-grid--3">
         {% for event in upcoming_events %}
-          <div class="event">
-            <p class="event-meta">
-              {{ event.date }}{% if event.time != "" %} · {{ event.time }}{% endif %}
-              {% if event.location != "" %}<br>{{ event.location }}{% endif %}
-            </p>
-            <div class="event-body">
-              <h3>{{ event.title }}</h3>
-              {% if event.description != "" %}<p>{{ event.description }}</p>{% endif %}
-              {% if event.link != "" %}<a href="{{ event.link }}">{{ t.agenda_more_info }} &rarr;</a>{% endif %}
+        <li>
+          <article class="event-card">
+            <div class="event-card-meta">
+              <span class="event-meta-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="event-meta-icon" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                {{ event.date | date: "%d %b. %Y" }}
+              </span>
+              {% if event.time != "" %}
+              <span class="event-meta-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="event-meta-icon" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                {{ event.time }}
+              </span>
+              {% endif %}
             </div>
-          </div>
-        {% endfor %}
-      {% endif %}
-
-      {% comment %} Past events (descending — reverse the array) {% endcomment %}
-      {% assign past_events = year_events | where_exp: "e", "e.date < today" | reverse %}
-      {% if past_events.size > 0 %}
-        <h3 class="agenda-section-label agenda-section-label--past">{{ t.agenda_past }}</h3>
-        {% for event in past_events %}
-          <div class="event event--past">
-            <p class="event-meta">
-              {{ event.date }}{% if event.time != "" %} · {{ event.time }}{% endif %}
-              {% if event.location != "" %}<br>{{ event.location }}{% endif %}
+            <h3 class="event-card-title">{{ event.title }}</h3>
+            {% if event.location != "" %}
+            <p class="event-card-location">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="event-meta-icon" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              {{ event.location }}
             </p>
-            <div class="event-body">
-              <h3>{{ event.title }}</h3>
-              {% if event.description != "" %}<p>{{ event.description }}</p>{% endif %}
-              {% if event.link != "" %}<a href="{{ event.link }}">{{ t.agenda_more_info }} &rarr;</a>{% endif %}
-            </div>
-          </div>
+            {% endif %}
+            {% if event.description != "" %}
+            <p class="event-card-desc">{{ event.description }}</p>
+            {% endif %}
+            {% if event.link != "" %}
+            <a href="{{ event.link }}" class="event-card-link" target="_blank" rel="noopener">
+              {{ t.agenda_more_info | default: "Plus d'infos" }}
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="event-link-icon" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+            </a>
+            {% endif %}
+          </article>
+        </li>
         {% endfor %}
-      {% endif %}
-
+      </ul>
     </div>
-  {% endfor %}
-</div>
+    {% endif %}
+
+    {% comment %} Past events by year {% endcomment %}
+    {% assign past_events = "" | split: "" %}
+    {% for event in events %}
+      {% if event.date < today and event.title != "" %}
+        {% assign past_events = past_events | push: event %}
+      {% endif %}
+    {% endfor %}
+
+    {% assign past_years = "" | split: "" %}
+    {% for event in past_events %}
+      {% assign y = event.date | slice: 0, 4 %}
+      {% unless past_years contains y %}
+        {% assign past_years = past_years | push: y %}
+      {% endunless %}
+    {% endfor %}
+    {% assign past_years = past_years | sort | reverse %}
+
+    {% if past_years.size > 0 %}
+    <div class="events-group events-group--past">
+      <h2 class="events-group-title">{{ t.agenda_past | default: "Événements passés" }}</h2>
+      {% for year in past_years %}
+        {% assign year_events = past_events | where_exp: "e", "e.date contains year" | reverse %}
+        <div class="past-year-row">
+          <div class="past-year-label">
+            <span class="past-year-num">{{ year }}</span>
+          </div>
+          <ul class="events-grid events-grid--2">
+            {% for event in year_events %}
+            <li>
+              <article class="event-card">
+                <div class="event-card-meta">
+                  <span class="event-meta-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="event-meta-icon" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                    {{ event.date | date: "%d %b. %Y" }}
+                  </span>
+                  {% if event.time != "" %}
+                  <span class="event-meta-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="event-meta-icon" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    {{ event.time }}
+                  </span>
+                  {% endif %}
+                </div>
+                <h3 class="event-card-title">{{ event.title }}</h3>
+                {% if event.location != "" %}
+                <p class="event-card-location">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="event-meta-icon" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                  {{ event.location }}
+                </p>
+                {% endif %}
+                {% if event.description != "" %}
+                <p class="event-card-desc">{{ event.description }}</p>
+                {% endif %}
+                {% if event.link != "" %}
+                <a href="{{ event.link }}" class="event-card-link" target="_blank" rel="noopener">
+                  {{ t.agenda_more_info | default: "Plus d'infos" }}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="event-link-icon" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+                </a>
+                {% endif %}
+              </article>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+  </div>
+</section>
