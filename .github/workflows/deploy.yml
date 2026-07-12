@@ -35,6 +35,7 @@ jobs:
           SHEET_AGENDA_URL: ${{ secrets.SHEET_AGENDA_URL }}
           SHEET_PROJECTS_URL: ${{ secrets.SHEET_PROJECTS_URL }}
           SHEET_META_URL: ${{ secrets.SHEET_META_URL }}
+          SHEET_SOCIAL_URL: ${{ secrets.SHEET_SOCIAL_URL }}
 
       - name: Convert CSVs to YAML
         run: mkdir -p _data && node .github/scripts/csv-to-yaml.js
