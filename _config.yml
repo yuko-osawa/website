@@ -24,6 +24,7 @@ include:
 header_pages:
   - _pages/index.html
   - _pages/agenda.html
+  - _pages/contact.html
 
 # Jekyll settings
 markdown: kramdown

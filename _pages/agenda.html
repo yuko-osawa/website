@@ -13,7 +13,7 @@ permalink: /agenda/
     <header class="page-header">
       <span class="page-eyebrow">{{ t.agenda_upcoming | default: "Calendrier" }}</span>
       <h1 class="page-title">Agenda</h1>
-      <p class="page-subtitle">Tout ce qui arrive — et un retour sur les rencontres passées.</p>
+      <p class="page-subtitle">{{ t.agenda_intro | default: "Tout ce qui arrive — et un retour sur les rencontres passées." }}</p>
     </header>
 
     {% comment %} Upcoming events {% endcomment %}

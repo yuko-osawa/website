@@ -13,7 +13,7 @@ permalink: /
     <div class="section-header-block">
       <span class="page-eyebrow">{{ t.agenda_upcoming | default: "À venir" }}</span>
       <h2 class="section-title">{{ t.upcoming_agenda | default: "Prochains événements" }}</h2>
-      <p class="section-subtitle">Concerts, ateliers et master classes à venir.</p>
+      <p class="section-subtitle">{{ t.upcoming_agenda_intro | default: "Concerts, ateliers et master classes à venir." }}</p>
     </div>
 
     {% assign upcoming_count = 0 %}
