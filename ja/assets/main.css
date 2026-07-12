@@ -845,11 +845,12 @@ body {
   background: var(--bg-secondary);
   color: var(--primary);
   opacity: 1;
+  text-decoration: none;
 }
 
 .social-icon {
-  width: 1.1rem;
-  height: 1.1rem;
+  font-size: 1.1rem;
+  line-height: 1;
 }
 
 /* Language selector */
