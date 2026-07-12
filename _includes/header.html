@@ -1,9 +1,10 @@
+{% assign t = site.data.meta[site.active_lang] %}
 <header class="site-header">
   <div class="header-inner">
     <a class="site-brand" href="{{ '/' | relative_url }}">
       <img src="{{ '/assets/images/logo.png' | relative_url }}" alt="{{ site.title }} logo" class="brand-logo">
       <span class="brand-name">{{ site.title }}</span>
-      <span class="brand-sub">Vocal Coach – Collaborative Pianist | Paris</span>
+      <span class="brand-sub">{{ t.site_description }}</span>
     </a>
 
     <div class="header-right">
