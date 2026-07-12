@@ -1,0 +1,6 @@
+{%- assign sorted_socials = site.data.social.all | sort: "order" -%}
+{%- for social in sorted_socials -%}
+  <a href="{{ social.link }}" target="_blank" rel="noopener" aria-label="{{ social.icon | remove: 'fa-' | capitalize }}" class="social-link">
+    <i class="fa-brands {{ social.icon }} social-icon" aria-hidden="true"></i>
+  </a>
+{%- endfor -%}

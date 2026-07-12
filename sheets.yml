@@ -11,3 +11,7 @@ sheets:
     secret: SHEET_META_URL
     group_by: [lang]
     key_value: [label, content]
+
+  - name: social 
+    secret: SHEET_SOCIAL_URL
+    sort_by: order
